@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RMAS Vista</title>
+<meta name="theme-color" content="#eef4fb">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#030d17; --bg2:#06182a;
+  --ink:#eaf4ff; --muted:#8aa6c1;
+  --accent:#3d9bff; --accent2:#8fd0ff;
+  --glow:rgba(61,155,255,.55);
+  --line:rgba(160,200,240,.16);
+  --card1:rgba(18,52,90,.55); --card2:rgba(5,18,32,.75);
+  --node:#0a2447; --soft:rgba(61,155,255,.16);
+}
+body.v-c{
+  --bg:#eef4fb; --bg2:#e2ecf8;
+  --ink:#0b1f3f; --muted:#53698a;
+  --accent:#1f6fff; --accent2:#1f6fff;
+  --glow:rgba(31,111,255,.35);
+  --line:rgba(11,31,63,.12);
+  --card1:#ffffff; --card2:#f4f8fe;
+  --node:#0b2a55; --soft:rgba(31,111,255,.1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* ---------- VISTA wordmark ---------- */
+.wm{display:inline-flex;align-items:baseline;font-weight:900;line-height:1;letter-spacing:.01em}
+.wm svg{height:.70em;width:.8em;margin-left:.02em;overflow:visible}
+.wm .leg{fill:currentColor}
+.wm .tri{fill:var(--accent)}
+
+/* ---------- shared hero ---------- */
+.hero{position:relative;min-height:100vh;display:none;flex-direction:column;overflow:hidden}
+body.v-a .hero-a, body.v-b .hero-b, body.v-c .hero-c{display:flex}
+nav{position:relative;z-index:6;display:flex;align-items:center;justify-content:space-between;padding:26px 6vw;gap:16px}
+.brand{display:flex;align-items:baseline;gap:8px}
+.brand small{font-size:12px;font-weight:700;letter-spacing:.18em}
+.brand .wm{font-size:24px}
+.links{display:flex;gap:40px;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.links a{opacity:.8;transition:opacity .2s,color .2s}
+.links a:hover{opacity:1;color:var(--accent2)}
+.btn-outline{display:inline-flex;align-items:center;gap:10px;border:1px solid currentColor;border-radius:6px;padding:11px 24px;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:background .25s,box-shadow .25s,border-color .25s,color .25s;white-space:nowrap}
+.btn-outline:hover{background:var(--soft);border-color:var(--accent);color:var(--accent2);box-shadow:0 0 24px var(--glow)}
+.btn-solid{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#fff;border-radius:8px;padding:15px 28px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;box-shadow:0 10px 30px var(--glow);transition:transform .25s}
+.btn-solid:hover{transform:translateY(-2px)}
+.tagline{font-size:clamp(10px,1.1vw,13px);font-weight:700;letter-spacing:.34em;text-transform:uppercase;color:var(--accent2)}
+
+.stats{position:relative;z-index:4;display:grid;grid-template-columns:repeat(3,1fr) 1.2fr auto;border-top:1px solid var(--line);background:rgba(2,10,18,.55);backdrop-filter:blur(10px)}
+body.v-c .stats{background:rgba(255,255,255,.7)}
+.stat{padding:24px 14px;text-align:center;border-right:1px solid var(--line)}
+.stat b{display:block;font-size:clamp(22px,2.4vw,30px);font-weight:700}
+.stat small{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.play{display:flex;align-items:center;justify-content:center;gap:14px;border-right:1px solid var(--line);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:18px}
+.play i{width:46px;height:46px;border:1.5px solid currentColor;border-radius:50%;display:grid;place-items:center;transition:box-shadow .25s,border-color .25s}
+.play:hover i{border-color:var(--accent);box-shadow:0 0 20px var(--glow)}
+.foot-tag{display:flex;align-items:center;justify-content:center;padding:0 32px;font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+
+.particles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.dot{position:absolute;width:2px;height:2px;border-radius:50%;background:#cfe6ff;opacity:.5;animation:rise linear infinite}
+@keyframes rise{from{transform:translateY(0);opacity:0}15%{opacity:.7}to{transform:translateY(-60vh);opacity:0}}
+
+/* ---------- OPTION A : cinematic portal ---------- */
+.hero-a{background:
+  radial-gradient(ellipse 60% 55% at 64% 48%,rgba(50,130,230,.45),transparent 70%),
+  radial-gradient(ellipse 90% 70% at 50% 110%,rgba(30,90,170,.35),transparent 70%),
+  linear-gradient(180deg,#030f1d 0%,#0a2442 55%,#041222 100%)}
+.hero-a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(180deg,transparent,rgba(3,13,23,.6) 40%,rgba(3,13,23,.95));pointer-events:none;z-index:1}
+.stage-a{position:relative;flex:1;display:flex;align-items:center;z-index:2;padding:0 6vw}
+.portal{position:absolute;left:64%;top:50%;width:min(34vw,420px);aspect-ratio:.72;transform:translate(-50%,-52%) rotate(8deg);border-radius:50%;border:7px solid #e2f1ff;
+  box-shadow:0 0 18px #cde7ff,0 0 50px rgba(61,155,255,.95),0 0 130px rgba(61,155,255,.55),inset 0 0 18px #cde7ff,inset 0 0 60px rgba(61,155,255,.6);animation:pulse 5s ease-in-out infinite}
+.portal::after{content:"";position:absolute;left:-12%;right:-12%;top:47%;height:9px;background:linear-gradient(90deg,transparent,rgba(220,240,255,.9),transparent);filter:blur(1px);animation:glitch 3.2s steps(1) infinite}
+@keyframes pulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.2)}}
+@keyframes glitch{0%,86%,100%{transform:translateX(0);opacity:0}88%{transform:translateX(-14px);opacity:1}92%{transform:translateX(10px);opacity:.8}95%{opacity:0}}
+.fog{position:absolute;left:64%;bottom:18%;width:min(50vw,640px);height:180px;transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(170,210,250,.3),transparent 65%);filter:blur(20px)}
+.copy-a{position:relative;z-index:3}
+.pre{font-size:clamp(18px,2.2vw,30px);font-weight:800;letter-spacing:.6em;margin-bottom:10px;opacity:.95}
+.title-a{font-size:clamp(58px,12vw,176px);letter-spacing:.2em}
+.title-a .wm{gap:.2em;letter-spacing:0}
+.title-a .cut{background:linear-gradient(180deg,var(--ink) 0 46%,transparent 46% 54%,var(--ink) 54% 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.title-a .behind{opacity:.55}
+.copy-a .tagline{margin-top:24px}
+.cta{margin-top:30px;display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.cta:hover{color:var(--accent2)}
+
+/* ---------- OPTION B / C : orbit ---------- */
+.hero-b{background:
+  radial-gradient(circle at 50% 48%,rgba(40,110,210,.40),transparent 45%),
+  radial-gradient(ellipse 90% 60% at 50% 120%,rgba(20,70,150,.4),transparent 70%),
+  linear-gradient(180deg,#020a14,#061a33 60%,#030d17)}
+.stage-b{position:relative;flex:1;display:grid;place-items:center;padding:30px 16px 60px;z-index:2}
+.orbit{position:relative;width:var(--S);height:var(--S);--S:min(560px,78vw)}
+.orbit svg.ring{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.ring .track{fill:none;stroke:var(--accent);stroke-opacity:.25;stroke-width:1.5}
+.ring .flow{fill:none;stroke:url(#flowGrad);stroke-width:3;stroke-linecap:round;stroke-dasharray:60 240;animation:flow 6s linear infinite;filter:drop-shadow(0 0 6px var(--accent))}
+body.v-c .ring .flow{filter:none}
+@keyframes flow{to{stroke-dashoffset:-1200}}
+.center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.center .r{font-size:clamp(18px,3.4vw,34px);font-weight:800;letter-spacing:.06em}
+.center .wm{font-size:clamp(52px,12vw,118px);margin-top:2px}
+.center .tagline{margin-top:14px;line-height:1.7;letter-spacing:.24em;max-width:16em}
+.center .btn-solid{margin-top:22px}
+.node{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:10px;z-index:3;cursor:pointer}
+.node i{width:var(--N);height:var(--N);--N:clamp(52px,8vw,82px);border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#1a4c8a,var(--node) 70%);color:#fff;border:2px solid rgba(120,190,255,.7);box-shadow:0 0 0 6px rgba(61,155,255,.12),0 0 28px var(--glow);transition:transform .3s,box-shadow .3s}
+.node i svg{width:44%;height:44%}
+.node span{font-size:clamp(9px,1vw,12px);font-weight:800;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.node:hover i{transform:scale(1.08);box-shadow:0 0 0 8px rgba(61,155,255,.2),0 0 40px var(--glow)}
+.node.lbl-top span{order:-1}
+
+.hero-c{background:radial-gradient(circle at 72% 45%,#ffffff,transparent 45%),linear-gradient(180deg,#f3f7fc,#e4edf8)}
+.stage-c{position:relative;flex:1;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;padding:20px 6vw 60px;z-index:2}
+.copy-c .r{font-size:clamp(22px,2.6vw,36px);font-weight:800;letter-spacing:.08em}
+.copy-c .wm{font-size:clamp(70px,10vw,150px)}
+.copy-c .tagline{margin-top:18px}
+.copy-c p{margin-top:22px;max-width:440px;color:var(--muted);line-height:1.7;font-size:15px}
+.copy-c .btns{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
+.hero-c .orbit{--S:min(440px,40vw);justify-self:center}
+.hero-c .node i{--N:clamp(50px,5.4vw,70px)}
+.hero-c .center .wm{font-size:clamp(34px,4.6vw,56px)}
+.hero-c .center .r{font-size:clamp(14px,1.6vw,20px)}
+
+/* ---------- TOOLS ---------- */
+.tools{position:relative;padding:100px 6vw 90px;background:radial-gradient(ellipse 50% 40% at 50% 0%,var(--soft),transparent 70%),linear-gradient(180deg,var(--bg2),var(--bg))}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:46px;flex-wrap:wrap}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;color:var(--accent)}
+.head h2{margin-top:12px;font-size:clamp(28px,4vw,48px);font-weight:800;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:baseline;gap:.4em;flex-wrap:wrap}
+.head p{max-width:420px;color:var(--muted);font-size:14px;line-height:1.7}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px}
+.card{position:relative;display:flex;flex-direction:column;min-height:280px;padding:30px 28px 26px;border-radius:18px;background:linear-gradient(160deg,var(--card1),var(--card2));border:1px solid var(--line);overflow:hidden;cursor:pointer;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .35s,box-shadow .35s}
+body.v-c .card{box-shadow:0 8px 30px rgba(11,31,63,.06)}
+.card::before{content:"";position:absolute;right:-70px;top:-70px;width:200px;height:240px;border-radius:50%;border:3px solid var(--line);transform:rotate(18deg);transition:border-color .35s,box-shadow .35s}
+.card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 18px 50px rgba(0,0,0,.25),0 0 40px var(--soft)}
+.card:hover::before{border-color:var(--accent);box-shadow:0 0 30px var(--glow)}
+.num{font-size:11px;font-weight:700;letter-spacing:.3em;color:var(--muted)}
+.ico{margin:22px 0 20px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:var(--node);border:2px solid rgba(120,190,255,.6);color:#fff;box-shadow:0 0 18px var(--glow)}
+.card h3{font-size:18px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;line-height:1.3}
+.card p{margin-top:10px;font-size:13.5px;line-height:1.65;color:var(--muted);flex:1}
+.tags{margin-top:16px;display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.open{margin-top:20px;display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding-top:16px;border-top:1px solid var(--line)}
+.card:hover .open{color:var(--accent)}
+.card.soon{cursor:default}.card.soon .open{color:var(--muted)}
+.card.soon:hover{transform:none;border-color:var(--line);box-shadow:none}
+.card.flash{animation:flash 1.4s ease}
+@keyframes flash{0%,100%{box-shadow:none}30%{box-shadow:0 0 0 3px var(--accent),0 0 40px var(--glow)}}
+
+/* ---------- TUTORIALS ---------- */
+.tuts{padding:90px 6vw 100px;background:linear-gradient(180deg,var(--bg),var(--bg2))}
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.vcard{display:flex;flex-direction:column;border-radius:18px;overflow:hidden;background:var(--card1);border:1px solid var(--line);box-shadow:0 8px 30px rgba(11,31,63,.06);cursor:pointer;text-align:left;font:inherit;color:inherit;padding:0;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .35s,box-shadow .35s}
+.vcard:hover,.vcard:focus-visible{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 18px 44px rgba(11,31,63,.14);outline:none}
+.thumb{position:relative;aspect-ratio:16/10;background:#0b1a3a center/cover no-repeat;display:grid;place-items:center}
+.thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,20,45,.1),rgba(6,20,45,.55))}
+.thumb .pbtn{position:relative;z-index:2;width:66px;height:66px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;box-shadow:0 0 0 8px rgba(31,111,255,.25),0 10px 30px rgba(31,111,255,.5);transition:transform .3s}
+.vcard:hover .pbtn{transform:scale(1.1)}
+.thumb .dur{position:absolute;z-index:2;right:12px;bottom:12px;background:rgba(3,13,30,.8);color:#fff;font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 8px;border-radius:6px}
+.thumb .fmt{position:absolute;z-index:2;left:12px;top:12px;background:rgba(255,255,255,.92);color:#0b1f3f;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:5px 9px;border-radius:999px}
+.vbody{padding:22px 24px 24px}
+.vbody .num{display:block;margin-bottom:8px}
+.vbody h3{font-size:17px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;line-height:1.3}
+.vbody p{margin-top:8px;font-size:13.5px;line-height:1.6;color:var(--muted)}
+.modal{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(3,10,24,.86);backdrop-filter:blur(6px)}
+.modal.open{display:flex}
+.mbox{position:relative;display:flex;flex-direction:column;align-items:center;gap:14px;max-width:100%}
+.mbox video{display:block;max-width:min(1100px,100%);max-height:calc(100vh - 120px);border-radius:14px;background:#000;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.mbox h4{color:#fff;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:center}
+.mclose{position:fixed;top:16px;right:16px;z-index:2;background:rgba(3,13,30,.6)!important;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;font-size:22px;line-height:1;cursor:pointer}
+@media (max-width:900px){.vgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.vgrid{grid-template-columns:1fr}.tuts{padding:70px 16px 70px}}
+
+/* ---------- MERCH GUIDES ---------- */
+.guides{padding:90px 6vw 40px;background:var(--bg)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:-18px 0 30px}
+.chip{font:inherit;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:var(--card1);color:var(--muted);cursor:pointer;transition:all .2s}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px}
+.gcard{display:flex;flex-direction:column;border-radius:18px;overflow:hidden;background:var(--card1);border:1px solid var(--line);box-shadow:0 8px 30px rgba(11,31,63,.06);transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .35s,box-shadow .35s}
+.gcard:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 18px 44px rgba(11,31,63,.14)}
+.gcover{position:relative;aspect-ratio:16/10;background:#0b1a3a center/cover no-repeat;border-bottom:1px solid var(--line)}
+.gcover.portrait{background-size:contain;background-color:#eef3fa}
+.gcover .badge{position:absolute;left:12px;top:12px;background:var(--accent);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:5px 10px;border-radius:999px}
+.gcover .pages{position:absolute;right:12px;bottom:12px;background:rgba(3,13,30,.8);color:#fff;font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 8px;border-radius:6px}
+.gbody{padding:20px 22px 22px;display:flex;flex-direction:column;flex:1}
+.gbody h3{font-size:15.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;line-height:1.35}
+.gbody p{margin-top:8px;font-size:13px;line-height:1.6;color:var(--muted);flex:1}
+.gact{margin-top:16px;display:flex;gap:10px}
+.gact a{flex:1;text-align:center;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:11px 10px;border-radius:8px;border:1px solid var(--line);transition:all .2s}
+.gact a.view{background:var(--accent);border-color:var(--accent);color:#fff}
+.gact a:hover{box-shadow:0 6px 18px var(--glow)}
+@media (max-width:560px){.guides{padding:70px 16px 30px}}
+footer{padding:32px 6vw;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:11px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase}
+
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:900px){
+  .links{display:none}
+  .portal{left:70%;width:52vw}.fog{left:70%}
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .play{grid-column:1/-1;border-top:1px solid var(--line);border-right:none}
+  .foot-tag{display:none}
+  .stage-c{grid-template-columns:1fr;text-align:center;padding-top:10px}
+  .copy-c p{margin-left:auto;margin-right:auto}
+  .copy-c .btns{justify-content:center}
+  .hero-c .orbit{--S:min(420px,70vw);margin-top:30px}
+}
+@media (max-width:560px){
+  nav{padding:18px 16px}
+  .btn-outline{padding:9px 12px;letter-spacing:1.5px}
+  .stage-a{padding:0 16px}
+  .pre{letter-spacing:.4em}
+  .title-a .wm{gap:.08em}
+  .portal{left:66%;width:64vw}
+  .copy-a .tagline{letter-spacing:.2em;line-height:1.8}
+  .stat{padding:16px 6px}
+  .orbit{--S:70vw}
+  .center .btn-solid{display:none}
+  .center .tagline{font-size:9px;letter-spacing:.16em}
+  .tools{padding:80px 16px 60px}
+  .grid{grid-template-columns:1fr}
+  footer{padding:24px 16px 80px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body class="v-c">
+
+<!-- reusable wordmark -->
+<template id="wmTpl"><span class="wm"><span>VIST</span><svg viewBox="0 0 100 100" aria-hidden="true"><polygon class="leg" points="36,0 64,0 100,100 74,100 50,32 26,100 0,100"/><polygon class="tri" points="57,60 73,100 41,100"/></svg></span></template>
+
+<header class="hero hero-c" id="home-c">
+  <nav>
+    <a href="#" class="brand"><small>RMAS</small><span data-wm></span></a>
+    <div class="links"><a href="#home-c">Home</a><a href="#tools">Tools</a><a href="#guides">Merch Guides</a><a href="#tutorials">Tutorials</a></div>
+    <a href="#tools" class="btn-outline">Open Tools</a>
+  </nav>
+  <div class="stage-c">
+    <div class="copy-c">
+      <div class="r">RMAS</div>
+      <span data-wm></span>
+      <p class="tagline">Connected for greater impact.</p>
+      <p>From warehouse to store shelf — every RMAS POSM and field tool in one place. Pick a step in the cycle or open a tool below.</p>
+      <div class="btns"><a href="#tools" class="btn-solid">Explore tools</a><a href="#tutorials" class="btn-outline">Watch tutorials</a></div>
+    </div>
+    <div class="orbit" data-orbit>
+      <div class="center"><div class="r">RMAS</div><span data-wm></span></div>
+    </div>
+  </div>
+  <div class="stats" data-stats></div>
+</header>
+
+<section class="tools" id="tools">
+  <div class="head">
+    <div>
+      <div class="eyebrow">Choose your tool</div>
+      <h2><span>RMAS</span><span data-wm></span></h2>
+    </div>
+    <p>Tap a tool to open it in a new tab. All tools share the same Google Sheets backend, so your data stays in sync on every device.</p>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="guides" id="guides">
+  <div class="head">
+    <div>
+      <div class="eyebrow">Reference</div>
+      <h2>CE Merchandising Guide</h2>
+    </div>
+    <p>Official merchandising guides for display and POSM execution. Tap View to open in your browser, or Download to keep a copy on your phone.</p>
+  </div>
+  <div class="chips" id="gchips"></div>
+  <div class="ggrid" id="ggrid"></div>
+</section>
+
+<section class="tuts" id="tutorials">
+  <div class="head">
+    <div>
+      <div class="eyebrow">Learn the tools</div>
+      <h2>Tutorials</h2>
+    </div>
+    <p>Short training videos for the team. Tap a video to play it — start with installation, then learn the Inventory Tool.</p>
+  </div>
+  <div class="vgrid" id="vgrid"></div>
+</section>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Tutorial video">
+  <div class="mbox">
+    <button class="mclose" id="mclose" aria-label="Close video">×</button>
+    <video id="player" controls playsinline preload="metadata"></video>
+    <h4 id="mtitle"></h4>
+  </div>
+</div>
+
+<footer>
+  <span>© <span id="yr"></span> RMAS Vista · Connected for greater impact</span>
+  <span>Samsung · RMAS Consumer Electronics</span>
+</footer>
+
+
+<script>
+/* =====================================================================
+   TOOL LINKS — paste each tool's GitHub Pages URL in "url".
+   Empty url = card shows "Coming soon".
+   ===================================================================== */
+const LINKS = {
+  inventory: "https://samsung-ce.github.io/RMAS-APPLICATION-MOBILE/",   // ← POSM Inventory Tool
+  request:   "https://samsung-ce.github.io/RMAS-REQUEST-FORM/",   // ← POSM Request Form
+  audit:     "",   // ← POSM Display Audit
+  scorecard: "https://samsung-ce.github.io/RMAS-KPI-TOOL/"    // ← TS Performance Scorecard
+};
+
+const ICONS = {
+  warehouse:'<path d="M3 21V9l9-5 9 5v12"/><path d="M7 21v-7h10v7"/><path d="M10 17h4"/>',
+  store:'<path d="M4 10v10h16V10"/><path d="M3 5h18l-1 5a2.5 2.5 0 0 1-5 0 2.5 2.5 0 0 1-5 0 2.5 2.5 0 0 1-5 0z"/><path d="M10 20v-5h4v5"/>',
+  exec:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="M8.5 10l1.5 1.5 3-3M8.5 16l1.5 1.5 3-3"/>',
+  truck:'<path d="M2 6h11v10H2z"/><path d="M13 9h4l4 4v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
+  box:'<path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/>',
+  chart:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  book:'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/><path d="M8 7h7M8 11h5"/>',
+  pie:'<circle cx="12" cy="12" r="9"/><path d="M12 3v9l6.4 6.4"/>'
+};
+
+const TOOLS = [
+  {id:"inv",  name:"POSM Inventory Tool",      url:LINKS.inventory, icon:"box",
+   desc:"Warehouse stock, barcode stock in/out, transfers, request status and movement analytics.", tags:["Dashboard","Barcode","Admin"]},
+  {id:"req",  name:"POSM Request Form",        url:LINKS.request, icon:"store",
+   desc:"Shop-style request form for stores and Trade Supervisors — add POSM to cart and submit in one go.", tags:["Mobile","Cart","Requests"]},
+  {id:"aud",  name:"POSM Display Audit",       url:LINKS.audit, icon:"exec",
+   desc:"Store visit audit for leaders: camera-only photos plus complete, outdated, damaged and clean checks.", tags:["Camera","Store Visit","Scoring"]},
+  {id:"ts",   name:"TS Performance Scorecard", url:LINKS.scorecard, icon:"chart",
+   desc:"Monthly Trade Supervisor scorecard on Reporting, Execution and Communication, per BU and overall.", tags:["Monthly","Per BU","Ranking"]},
+  {id:"mg",   name:"CE Merchandising Guide",   url:"#guides", icon:"book",
+   desc:"Official merchandising guides for TV, Sound Device, Display and Refrigerator — POSM placement and display standards.", tags:["TV / SD / DS","REF","PDF"]},
+  {id:"exa",  name:"Execution Analytics",      url:"https://claude.ai/artifact/AP5aKQrFtC2FAyKhmJ4Z1A", icon:"pie",
+   desc:"SPOP, TV BG and SB execution analytics — display compliance across regions and stores.", tags:["SPOP","TV BG","SB"]}
+];
+
+/* the 5 steps of the cycle, each pointing to a tool */
+const CYCLE = [
+  {label:"Warehouse",  icon:"warehouse", tool:"inv", angle:-90},
+  {label:"Stores",     icon:"store",     tool:"req", angle:-18},
+  {label:"Execution",  icon:"exec",      tool:"aud", angle:54},
+  {label:"Deployment", icon:"truck",     tool:"req", angle:126},
+  {label:"Inventory",  icon:"box",       tool:"inv", angle:198}
+];
+
+const svgI = (k,sw=1.8) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round">${ICONS[k]}</svg>`;
+const arrow = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+/* wordmarks */
+const wmHTML = document.getElementById('wmTpl').innerHTML;
+document.querySelectorAll('[data-wm]').forEach(el => el.outerHTML = wmHTML);
+
+/* stats bars */
+document.querySelectorAll('[data-stats]').forEach(el => el.innerHTML = `
+  <div class="stat"><b>${TOOLS.length}</b><small>Tools</small></div>
+  <div class="stat"><b>24/7</b><small>Cloud Sync</small></div>
+  <div class="stat"><b>100%</b><small>Mobile Ready</small></div>
+  <a class="play" href="#tutorials"><i><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></i>Watch Tutorials</a>
+  <div class="foot-tag">Samsung · RMAS CE</div>`);
+
+/* orbits */
+document.querySelectorAll('[data-orbit]').forEach((orb, oi) => {
+  const ring = `<svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+    <defs><linearGradient id="flowGrad${oi}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fd0ff"/><stop offset="1" stop-color="#1f6fff"/></linearGradient></defs>
+    <circle class="track" cx="100" cy="100" r="100"/>
+    <circle class="flow" cx="100" cy="100" r="100" style="stroke:url(#flowGrad${oi})"/>
+    <circle class="flow" cx="100" cy="100" r="100" style="stroke:url(#flowGrad${oi});animation-delay:-3s"/>
+  </svg>`;
+  orb.insertAdjacentHTML('afterbegin', ring);
+  CYCLE.forEach(c => {
+    const a = c.angle * Math.PI/180;
+    const n = document.createElement('a');
+    n.className = 'node' + (c.angle === -90 ? ' lbl-top' : '');
+    n.style.left = (50 + 50*Math.cos(a)) + '%';
+    n.style.top  = (50 + 50*Math.sin(a)) + '%';
+    n.href = '#tools';
+    n.title = TOOLS.find(t => t.id === c.tool).name;
+    n.innerHTML = `<i>${svgI(c.icon)}</i><span>${c.label}</span>`;
+    n.addEventListener('click', e => openTool(c.tool, e));
+    orb.appendChild(n);
+  });
+});
+
+function openTool(id, e){
+  const t = TOOLS.find(x => x.id === id);
+  if (t && t.url){ e.preventDefault(); window.open(t.url, '_blank', 'noopener'); return; }
+  setTimeout(() => { const c = document.getElementById('card-'+id); if(c){ c.classList.remove('flash'); void c.offsetWidth; c.classList.add('flash'); } }, 500);
+}
+
+/* tool cards */
+const grid = document.getElementById('grid');
+TOOLS.forEach((t, i) => {
+  const live = !!t.url;
+  const el = document.createElement(live ? 'a' : 'div');
+  el.className = 'card' + (live ? '' : ' soon');
+  el.id = 'card-' + t.id;
+  if (live){ el.href = t.url; if (!t.url.startsWith('#')){ el.target = '_blank'; el.rel = 'noopener'; } }
+  el.innerHTML = `<span class="num">${String(i+1).padStart(2,'0')}</span>
+    <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[t.icon]}</svg></div>
+    <h3>${t.name}</h3><p>${t.desc}</p>
+    <div class="tags">${t.tags.map(x=>`<span>${x}</span>`).join('')}</div>
+    <div class="open">${live ? (t.url.startsWith('#') ? 'View guides ' : 'Open tool ')+arrow : 'Coming soon'}</div>`;
+  grid.appendChild(el);
+});
+
+
+/* particles */
+document.querySelectorAll('.particles').forEach(pc => {
+  for (let i = 0; i < 36; i++){
+    const d = document.createElement('span'); d.className = 'dot';
+    d.style.left = (10 + Math.random()*80) + '%'; d.style.top = (40 + Math.random()*55) + '%';
+    d.style.animationDuration = (6 + Math.random()*10) + 's'; d.style.animationDelay = (-Math.random()*12) + 's';
+    pc.appendChild(d);
+  }
+});
+
+
+/* ---------- merchandising guides ---------- */
+const GUIDES = [
+  {title:"CE Merchandising Guidelines 2026", cat:"CE", file:"guides/2026 ONE PAGER AUG 6 2026.pdf", cover:"guides/2026-one-pager-01.jpg", pages:10, portrait:true, badge:"New",
+   desc:"One-pager overview of the 2026 CE merchandising guidelines (updated Aug 6, 2026)."},
+  {title:"2026 TV, Sound Device & Display POSM Guide", cat:"TV / SD / DS", file:"guides/LOWRES_2026_TV-SD-DS-MERCH GUIDE_5th ver.pdf", cover:"guides/2026-tv-sd-ds-merch-guide-01.jpg", pages:43, badge:"2026",
+   desc:"POSM merchandising guideline for TV, Sound Device and Display (5th version)."},
+  {title:"2026 Refrigerator Guide — Nationwide", cat:"REF", file:"guides/2026 REF Merchandising Guide Active_Nationwide 03-25-2026.pdf", cover:"guides/2026-ref-merch-guide-nationwide-01.jpg", pages:28, badge:"2026",
+   desc:"Active units, nationwide. Valid 04/01/2026 – 12/31/2026."},
+  {title:"2026 Refrigerator Guide — Nationwide & SM", cat:"REF", file:"guides/2026 REF Merchandising Guide - SM.pdf", cover:"guides/2026-ref-merch-guide-sm-01.jpg", pages:30, badge:"2026",
+   desc:"Active units for nationwide and SM models."},
+  {title:"2025 TV & Sound Device Retail Merch Guide", cat:"TV / SD / DS", file:"guides/2025_TVSD POSM MERCH GUIDE v0801_0fbf776b-af9e-442f-ac79-84557cfd1ebd2.pdf", cover:"guides/2025-tvsd-posm-merch-guide-01.jpg", pages:48, badge:"2025",
+   desc:"Previous-year TV and Sound Device retail merchandising guide, kept for reference."}
+];
+const ggrid = document.getElementById('ggrid'), gchips = document.getElementById('gchips');
+const GCATS = ['All', ...new Set(GUIDES.map(g => g.cat))];
+function renderGuides(cat){
+  ggrid.innerHTML = '';
+  GUIDES.filter(g => cat === 'All' || g.cat === cat).forEach(g => {
+    const c = document.createElement('div'); c.className = 'gcard';
+    c.innerHTML = `<a class="gcover${g.portrait ? ' portrait' : ''}" href="${encodeURI(g.file)}" target="_blank" rel="noopener" style="background-image:url('${g.cover}')" aria-label="View ${g.title}">
+        <span class="badge">${g.badge}</span><span class="pages">${g.pages} pages</span></a>
+      <div class="gbody"><span class="num">${g.cat}</span><h3 style="margin-top:8px">${g.title}</h3><p>${g.desc}</p>
+        <div class="gact"><a class="view" href="${encodeURI(g.file)}" target="_blank" rel="noopener">View</a><a href="${encodeURI(g.file)}" download>Download</a></div></div>`;
+    ggrid.appendChild(c);
+  });
+  gchips.querySelectorAll('.chip').forEach(b => b.classList.toggle('on', b.dataset.cat === cat));
+}
+GCATS.forEach(cat => { const b = document.createElement('button'); b.className = 'chip'; b.type = 'button'; b.dataset.cat = cat; b.textContent = cat; b.onclick = () => renderGuides(cat); gchips.appendChild(b); });
+renderGuides('All');
+
+/* ---------- tutorials ---------- */
+const VIDEOS = [
+  {title:"How to Install",          file:"videos/RMAS-POSM-How-to-Install-EN-Music.mp4",          poster:"videos/how-to-install.jpg",          dur:"1:19", fmt:"Phone",
+   desc:"Install RMAS POSM on your phone as an app — Android (Chrome) and iPhone."},
+  {title:"Using in Browser",        file:"videos/RMAS-POSM-Using-in-Browser-EN-Music.mp4",        poster:"videos/using-in-browser.jpg",        dur:"2:44", fmt:"Computer",
+   desc:"Open and use the tools in Chrome or Microsoft Edge on a computer."},
+  {title:"Inventory Tool Training", file:"videos/RMAS-POSM-Inventory-Tool-Training-EN-Music.mp4", poster:"videos/inventory-tool-training.jpg", dur:"8:14", fmt:"Full training",
+   desc:"Full walkthrough of the POSM Inventory Tool — stock, requests, transfers and reports."}
+];
+const vgrid = document.getElementById('vgrid'), modal = document.getElementById('modal'), player = document.getElementById('player');
+VIDEOS.forEach((v, i) => {
+  const b = document.createElement('button');
+  b.className = 'vcard'; b.type = 'button';
+  b.innerHTML = `<div class="thumb" style="background-image:url('${v.poster}')">
+      <span class="fmt">${v.fmt}</span>
+      <span class="pbtn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+      <span class="dur">${v.dur}</span></div>
+    <div class="vbody"><span class="num">${String(i+1).padStart(2,'0')}</span><h3>${v.title}</h3><p>${v.desc}</p></div>`;
+  b.onclick = () => openVideo(v);
+  vgrid.appendChild(b);
+});
+function openVideo(v){
+  player.src = encodeURI(v.file); player.poster = v.poster;
+  document.getElementById('mtitle').textContent = v.title;
+  modal.classList.add('open'); document.body.style.overflow = 'hidden';
+  player.play().catch(()=>{});
+}
+function closeVideo(){ player.pause(); player.removeAttribute('src'); player.load(); modal.classList.remove('open'); document.body.style.overflow = ''; }
+document.getElementById('mclose').onclick = closeVideo;
+modal.addEventListener('click', e => { if (e.target === modal) closeVideo(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeVideo(); });
+document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
