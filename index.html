@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RMAS Vista</title>
-<meta name="theme-color" content="#eef4fb">
+<meta name="theme-color" content="#020a16">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#030d17; --bg2:#06182a;
@@ -196,6 +196,157 @@ body.v-c .card{box-shadow:0 8px 30px rgba(11,31,63,.06)}
 .gact a.view{background:var(--accent);border-color:var(--accent);color:#fff}
 .gact a:hover{box-shadow:0 6px 18px var(--glow)}
 @media (max-width:560px){.guides{padding:70px 16px 30px}}
+
+/* ================= DESIGN D : ORB ================= */
+body.v-d{--bg:#020a16;--bg2:#04142a;--card1:rgba(20,60,110,.35);--card2:rgba(4,16,34,.8);--soft:rgba(80,160,255,.12);--accent:#4aa3ff;--accent2:#9ad2ff}
+.hero-d{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;color:#fff;font-family:'Inter Tight','Montserrat',sans-serif;
+  background:radial-gradient(ellipse 85% 70% at 50% -5%,#2f8fd6 0%,#135694 28%,#0a2d57 55%,#041430 78%,#020a16 100%)}
+.hero-d::after{content:"";position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(180deg,transparent,rgba(2,10,22,.85));pointer-events:none;z-index:1}
+.nav-d{position:relative;z-index:6;display:flex;align-items:center;justify-content:space-between;padding:22px 4vw;gap:16px}
+.nav-d .brand small{letter-spacing:.2em}
+.links-d{display:flex;gap:38px;font-size:14px;font-weight:400;opacity:.9}
+.links-d a{transition:opacity .2s}.links-d a:hover{opacity:.6}
+.pill-d{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:10px 20px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(8px);transition:background .25s}
+.pill-d:hover{background:rgba(255,255,255,.26)}
+.scene{position:absolute;inset:0;z-index:2;pointer-events:none;--O:clamp(130px,15vw,210px);--cy:40%}
+.orb{position:absolute;left:50%;top:var(--cy);width:var(--O);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;z-index:3;
+  background:radial-gradient(circle at 38% 32%,#4f8fc4 0%,#1d4f80 38%,#0c2a4c 70%,#06182e 100%);
+  box-shadow:0 0 50px 14px rgba(90,180,255,.55),0 0 140px 50px rgba(40,130,230,.3),inset -14px -18px 34px rgba(0,0,0,.55),inset 8px 10px 22px rgba(170,220,255,.28);
+  animation:float 7s ease-in-out infinite}
+.orb::before{content:"";position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(rgba(200,230,255,.45) .8px,transparent 1.3px) 0 0/5px 5px;
+  -webkit-mask:radial-gradient(circle at 40% 35%,#000 0 45%,transparent 72%);mask:radial-gradient(circle at 40% 35%,#000 0 45%,transparent 72%);opacity:.7}
+.orb::after{content:"";position:absolute;inset:-3px;border-radius:50%;border:1px solid rgba(170,220,255,.35)}
+@keyframes float{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-50%,-56%)}}
+.halo{position:absolute;left:50%;top:var(--cy);width:calc(var(--O)*3.2);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(110,190,255,.28),transparent 60%);filter:blur(10px)}
+.beam{position:absolute;left:50%;top:var(--cy);width:calc(var(--O)*1.6);height:62%;transform:translateX(-50%) perspective(400px) rotateX(-18deg);transform-origin:top;background:linear-gradient(180deg,rgba(130,205,255,.32),rgba(60,140,230,.1) 55%,transparent 90%);-webkit-mask:linear-gradient(90deg,transparent,#000 38%,#000 62%,transparent);mask:linear-gradient(90deg,transparent,#000 38%,#000 62%,transparent);filter:blur(6px)}
+.pedestal{position:absolute;left:50%;top:calc(var(--cy) + var(--O)*1.05);width:calc(var(--O)*1.3);height:18px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse,rgba(170,220,255,.55),transparent 70%);filter:blur(4px);animation:shadow 7s ease-in-out infinite}
+@keyframes shadow{0%,100%{opacity:1;transform:translateX(-50%) scale(1)}50%{opacity:.6;transform:translateX(-50%) scale(.85)}}
+.orbit3d{position:absolute;left:50%;top:var(--cy);width:calc(var(--O)*2.5);aspect-ratio:1;transform:translate(-50%,-50%) perspective(900px) rotateX(76deg);border-radius:50%;border:1px solid rgba(170,215,255,.28);z-index:2}
+.orbit3d .spin{position:absolute;inset:0;animation:spin 26s linear infinite}
+.orbit3d i{position:absolute;left:50%;top:0;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#cfe9ff;box-shadow:0 0 12px 4px rgba(120,200,255,.8);transform-origin:5px calc(var(--O)*1.25 + 5px)}
+.orbit3d i:nth-child(2){transform:rotate(72deg)}.orbit3d i:nth-child(3){transform:rotate(144deg)}.orbit3d i:nth-child(4){transform:rotate(216deg)}.orbit3d i:nth-child(5){transform:rotate(288deg)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.stat-d{position:absolute;z-index:4;text-align:center;transform:translate(-50%,-50%);display:grid;gap:6px;transition:opacity .2s}
+.stat-d:hover{opacity:.7}
+.stat-d small{font-size:13px;opacity:.6;font-weight:400}
+.stat-d b{font-size:14px;font-weight:500;white-space:nowrap}
+.s-top{left:50%;top:calc(40% - clamp(130px,15vw,210px)*.5 - 58px)}
+.s-left{left:calc(50% - clamp(210px,22vw,330px));top:48%}
+.s-right{left:calc(50% + clamp(210px,22vw,330px));top:48%}
+.hero-foot{position:absolute;z-index:5;left:0;right:0;bottom:0;padding:0 4vw 5.5vh;display:flex;justify-content:space-between;align-items:flex-end;gap:40px}
+.eyebrow-d{font-size:12px;letter-spacing:.3em;text-transform:uppercase;opacity:.6;margin-bottom:14px}
+.headline{font-family:'Inter Tight',sans-serif;font-weight:500;font-size:clamp(42px,5.6vw,88px);line-height:1.02;letter-spacing:-.035em}
+.side{max-width:360px;padding-bottom:6px}
+.side p{font-size:14px;line-height:1.55;opacity:.72}
+.btn-white{display:inline-block;margin-top:20px;background:#fff;color:#07172d;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:12px 22px;border-radius:999px;transition:transform .2s,box-shadow .2s}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(120,190,255,.35)}
+body.v-d .tools,body.v-d .guides,body.v-d .tuts{background:var(--bg)}
+body.v-d .tools{background:radial-gradient(ellipse 60% 35% at 50% 0%,rgba(40,120,220,.18),transparent 70%),var(--bg)}
+body.v-d .card,body.v-d .gcard,body.v-d .vcard{background:linear-gradient(160deg,rgba(24,64,112,.45),rgba(4,16,34,.85));box-shadow:none}
+body.v-d .chip{background:transparent}
+body.v-d .gact a{border-color:rgba(160,200,240,.25)}
+body.v-d footer{background:var(--bg)}
+@media (max-width:900px){
+  .links-d{display:none}
+  .s-left{left:22%;top:52%}.s-right{left:78%;top:52%}
+  .hero-foot{flex-direction:column;align-items:flex-start;gap:18px}
+}
+@media (max-width:560px){
+  .nav-d{padding:18px 16px}
+  .scene{--cy:34%;--O:120px}
+  .s-top{top:calc(34% - 118px)}
+  .s-left{left:20%;top:47%}.s-right{left:80%;top:47%}
+  .stat-d small{font-size:11px}.stat-d b{font-size:12px}
+  .hero-foot{padding:0 16px 32px}
+  .headline{font-size:clamp(38px,11vw,52px)}
+}
+
+/* ================= DESIGN E : SLIDES ================= */
+body.v-e{--accent:#27c4e6;--accent2:#8fe6f7}
+.hero-e{position:relative;height:100vh;height:100svh;min-height:600px;overflow:hidden;color:#fff;background:#05080d}
+.slides,.slide,.bg{position:absolute;inset:0}
+.slide{opacity:0;transition:opacity 1.1s ease;visibility:hidden}
+.slide.on{opacity:1;visibility:visible}
+.bg{background-size:cover;background-position:center}
+.bg.photo{background-size:auto 128%;background-position:55% 78%;filter:brightness(.62) contrast(1.08) saturate(1.1);transform:scale(1.08);transition:transform 7s ease-out}
+.slide.on .bg.photo{transform:scale(1)}
+.bg.studio{background:radial-gradient(ellipse 45% 55% at 64% 42%,rgba(90,120,150,.45),transparent 70%),radial-gradient(ellipse 80% 40% at 60% 100%,rgba(60,80,100,.5),transparent 70%),linear-gradient(180deg,#1a2129 0%,#0e1318 58%,#1b2127 58.2%,#0a0d11 100%)}
+.bg.studio.alt{background:radial-gradient(ellipse 40% 50% at 64% 45%,rgba(40,170,200,.28),transparent 70%),radial-gradient(ellipse 30% 40% at 72% 50%,rgba(220,60,140,.18),transparent 70%),linear-gradient(180deg,#141a22 0%,#0b0f15 58%,#161c23 58.2%,#07090c 100%)}
+.stage-e{position:absolute;left:55%;right:11%;bottom:36%;top:12%;display:flex;align-items:flex-end;justify-content:center;gap:2.5%}
+.stage-e img{display:block;max-height:100%;object-fit:contain;-webkit-box-reflect:below 2px linear-gradient(transparent 72%,rgba(255,255,255,.18));filter:drop-shadow(0 30px 40px rgba(0,0,0,.6));transform:translateY(24px);opacity:0;transition:transform 1.2s cubic-bezier(.2,.8,.2,1),opacity 1.2s}
+.slide.on .stage-e img{transform:none;opacity:1}
+.stage-e img{min-width:0;height:auto;max-width:100%}.stage-e.ref img{width:27%}.stage-e.ref img.hero-p{width:36%}
+.stage-e.ref img:nth-child(2){transition-delay:.12s}.stage-e.ref img:nth-child(3){transition-delay:.24s}
+.stage-e.snd img{width:100%;max-height:100%}
+.bg.studio.air{background:radial-gradient(ellipse 45% 55% at 66% 40%,rgba(120,190,230,.32),transparent 70%),linear-gradient(180deg,#18202a 0%,#0d1319 58%,#18202a 58.2%,#080b0f 100%)}
+.stage-e.wm img{width:29%}.stage-e.wm img.hero-p{width:34%}
+.stage-e.wm img:nth-child(2){transition-delay:.12s}.stage-e.wm img:nth-child(3){transition-delay:.24s}
+.stage-e.ac{flex-direction:column;align-items:center;justify-content:space-between;gap:6%}
+.stage-e.ac img.ac1{width:78%;-webkit-box-reflect:none;filter:drop-shadow(0 18px 30px rgba(0,0,0,.55))}
+.stage-e.ac img.ac2{width:72%;transition-delay:.15s}
+.stage-e.mon{bottom:38%;top:17%;left:55%;right:10%}.stage-e.mon img{width:100%;max-height:100%}
+.shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(4,7,11,.78) 0%,rgba(4,7,11,.35) 45%,rgba(4,7,11,.15) 70%,rgba(4,7,11,.45) 100%),linear-gradient(180deg,rgba(4,7,11,.55) 0%,transparent 22%,transparent 62%,rgba(4,7,11,.85) 100%)}
+.nav-e{position:absolute;z-index:6;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:26px 4.5vw}
+.brand-e{display:flex;align-items:baseline;gap:8px;font-size:12px;font-weight:700;letter-spacing:.18em}
+.brand-e .wm{font-size:20px;letter-spacing:.01em}
+.brand-e .wm .tri{fill:var(--accent)}
+.links-e{display:flex;gap:56px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.links-e a{opacity:.85;transition:opacity .2s,color .2s}.links-e a:hover{opacity:1;color:var(--accent)}
+.burger{display:grid;gap:5px;width:26px;padding:6px 0}
+.burger i{display:block;height:2px;background:#fff;border-radius:2px}.burger i:last-child{width:60%;justify-self:end}
+.copy-e{position:absolute;z-index:5;left:8vw;top:50%;transform:translateY(-58%)}
+.copy-e .cat{font-size:11px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;min-height:1em;transition:opacity .4s}
+.copy-e h1{font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(34px,4.6vw,68px);line-height:1.12;letter-spacing:.06em}
+.watch{margin-top:34px;display:flex;align-items:center;gap:16px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;width:max-content}
+.watch span{width:52px;height:52px;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;transition:background .25s,color .25s}
+.watch:hover span{background:#fff;color:#05080d}
+.know{display:inline-block;margin-top:38px;background:var(--accent);color:#04202a;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:12px 26px;border-radius:3px;transition:filter .2s,transform .2s}
+.know:hover{filter:brightness(1.1);transform:translateY(-2px)}
+.info-e{position:absolute;z-index:5;right:7.5vw;top:66%;width:min(300px,26vw);padding:22px 22px 20px;background:rgba(40,48,58,.62);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-left:2px solid var(--accent)}
+.info-e h4{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.info-e p{margin-top:12px;font-size:12.5px;line-height:1.65;opacity:.8}
+.info-e a{display:inline-block;margin-top:14px;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.info-e.swap{animation:swap .6s ease}
+@keyframes swap{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.rail{position:absolute;z-index:5;right:3.2vw;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:14px;font-size:12px;font-weight:700}
+.track{position:relative;width:2px;height:min(34vh,260px);background:rgba(255,255,255,.25);display:flex;flex-direction:column}
+.track button{flex:1;border:0;background:transparent;cursor:pointer;width:18px;margin-left:-8px;position:relative}
+.track button::after{content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;background:#fff;transform:scaleY(0);transform-origin:top;transition:transform .5s}
+.track button.on::after{transform:scaleY(1)}
+.foot-e{position:absolute;z-index:5;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:flex-end;padding:0 4.5vw 4.5vh 8vw}
+.soc{display:flex;gap:48px;font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;opacity:.8}
+.soc a:hover{color:var(--accent)}
+.nums{display:flex;gap:clamp(30px,6vw,90px);margin-right:9vw}
+.nums a{display:grid;gap:4px}
+.nums b{font-size:clamp(24px,2.4vw,34px);font-weight:700;letter-spacing:.02em}
+.nums small{font-size:12px;opacity:.8}
+body.v-e .tools{background:radial-gradient(ellipse 60% 35% at 50% 0%,rgba(39,196,230,.12),transparent 70%),#070b10}
+body.v-e .guides,body.v-e .tuts,body.v-e footer{background:#070b10}
+body.v-e .card,body.v-e .gcard,body.v-e .vcard{background:linear-gradient(160deg,rgba(40,52,66,.55),rgba(10,14,20,.9));border-color:rgba(200,220,240,.12)}
+body.v-e .ico{background:#0f1a24;border-color:rgba(39,196,230,.5);box-shadow:0 0 16px rgba(39,196,230,.25)}
+@media (max-width:1000px){
+  .links-e{display:none}
+  .info-e{display:none}
+  .stage-e,.stage-e.mon{left:52%;right:8%;bottom:30%}
+  .nums{margin-right:0}
+}
+@media (max-width:640px){
+  .nav-e{padding:18px 16px}
+  .copy-e{left:16px;right:52px;top:auto;bottom:150px;transform:none}
+  .copy-e h1{font-size:clamp(28px,8.6vw,40px)}
+  .watch{margin-top:22px}.know{margin-top:22px}
+  .stage-e{left:8%;right:12%;top:11%;bottom:52%}
+  .bg.photo{background-size:auto 72%;background-position:28% 62%}
+  .stage-e.mon{top:14%;bottom:56%;left:8%;right:12%}
+  .shade{background:linear-gradient(180deg,rgba(4,7,11,.4) 0%,transparent 25%,rgba(4,7,11,.55) 50%,rgba(4,7,11,.95) 100%)}
+  .rail{right:14px;top:34%}
+  .track{height:120px}
+  .soc{display:none}
+  .foot-e{padding:0 16px 26px;justify-content:flex-start}
+  .nums{gap:34px}
+  .nums b{font-size:22px}.nums small{font-size:11px}
+}
 footer{padding:32px 6vw;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:11px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase}
 
 
@@ -230,30 +381,79 @@ footer{padding:32px 6vw;border-top:1px solid var(--line);display:flex;justify-co
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
-<body class="v-c">
+<body class="v-d v-e">
 
 <!-- reusable wordmark -->
 <template id="wmTpl"><span class="wm"><span>VIST</span><svg viewBox="0 0 100 100" aria-hidden="true"><polygon class="leg" points="36,0 64,0 100,100 74,100 50,32 26,100 0,100"/><polygon class="tri" points="57,60 73,100 41,100"/></svg></span></template>
 
-<header class="hero hero-c" id="home-c">
-  <nav>
-    <a href="#" class="brand"><small>RMAS</small><span data-wm></span></a>
-    <div class="links"><a href="#home-c">Home</a><a href="#tools">Tools</a><a href="#guides">Merch Guides</a><a href="#tutorials">Tutorials</a></div>
-    <a href="#tools" class="btn-outline">Open Tools</a>
-  </nav>
-  <div class="stage-c">
-    <div class="copy-c">
-      <div class="r">RMAS</div>
-      <span data-wm></span>
-      <p class="tagline">Connected for greater impact.</p>
-      <p>From warehouse to store shelf — every RMAS POSM and field tool in one place. Pick a step in the cycle or open a tool below.</p>
-      <div class="btns"><a href="#tools" class="btn-solid">Explore tools</a><a href="#tutorials" class="btn-outline">Watch tutorials</a></div>
+<header class="hero-e" id="home">
+  <div class="slides" id="slides">
+    <div class="slide on" data-i="0">
+      <div class="bg photo" style="background-image:url('images/tv-showroom.jpg')"></div>
     </div>
-    <div class="orbit" data-orbit>
-      <div class="center"><div class="r">RMAS</div><span data-wm></span></div>
+    <div class="slide" data-i="1">
+      <div class="bg studio"></div>
+      <div class="stage-e ref">
+        <img src="images/ref-bespoke-navy.webp" alt="Samsung Bespoke AI top mount refrigerator in navy">
+        <img src="images/ref-french-door.webp" alt="Samsung French door refrigerator" class="hero-p">
+        <img src="images/ref-bespoke-pink.webp" alt="Samsung Bespoke AI top mount refrigerator in pink">
+      </div>
+    </div>
+    <div class="slide" data-i="2">
+      <div class="bg studio alt"></div>
+      <div class="stage-e snd"><img src="images/sound-tower.webp" alt="Samsung Sound Tower speakers"></div>
+    </div>
+    <div class="slide" data-i="3">
+      <div class="bg studio"></div>
+      <div class="stage-e mon"><img src="images/odyssey-g5.webp" alt="Samsung Odyssey G5 gaming monitor"></div>
+    </div>
+    <div class="slide" data-i="4">
+      <div class="bg studio air"></div>
+      <div class="stage-e ac">
+        <img src="images/ac-windfree-1way.webp" alt="Samsung WindFree 1Way Cassette air conditioner" class="ac1">
+        <img src="images/ac-window-type.webp" alt="Samsung window-type air conditioner" class="ac2">
+      </div>
+    </div>
+    <div class="slide" data-i="5">
+      <div class="bg studio"></div>
+      <div class="stage-e wm">
+        <img src="images/wm-wd10-front-load.webp" alt="Samsung WD10 front load washer-dryer combo">
+        <img src="images/wm-bespoke-ai-laundry.webp" alt="Samsung Bespoke AI Laundry Combo" class="hero-p">
+        <img src="images/wm-wa40-top-load.webp" alt="Samsung WA40 top load washing machine">
+      </div>
     </div>
   </div>
-  <div class="stats" data-stats></div>
+  <div class="shade"></div>
+
+  <nav class="nav-e">
+    <a href="#home" class="brand-e">RMAS <span data-wm></span></a>
+    <div class="links-e"><a href="#home">Home</a><a href="#tools">Tools</a><a href="#guides">Merch Guides</a><a href="#tutorials">Tutorials</a></div>
+    <a href="#tools" class="burger" aria-label="Open tools"><i></i><i></i></a>
+  </nav>
+
+  <div class="copy-e">
+    <div class="cat" id="ecat">TV &amp; Sound Device</div>
+    <h1>CONNECTED FOR<br>GREATER IMPACT</h1>
+    <a href="#tutorials" class="watch"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>Watch tutorials</a>
+    <a href="#tools" class="know">Explore tools</a>
+  </div>
+
+  <aside class="info-e" id="einfo"></aside>
+
+  <div class="rail" aria-label="Slides">
+    <span id="enow">01</span>
+    <div class="track" id="etrack"></div>
+    <span id="etotal">04</span>
+  </div>
+
+  <div class="foot-e">
+    <div class="soc"><a href="#guides">Merch Guides</a><a href="#tutorials">Tutorials</a></div>
+    <div class="nums">
+      <a href="#tools"><b>6</b><small>Tools</small></a>
+      <a href="#guides"><b>10</b><small>Merch Guides</small></a>
+      <a href="#tutorials"><b>3</b><small>Tutorials</small></a>
+    </div>
+  </div>
 </header>
 
 <section class="tools" id="tools">
@@ -337,7 +537,7 @@ const TOOLS = [
   {id:"ts",   name:"TS Performance Scorecard", url:LINKS.scorecard, icon:"chart",
    desc:"Monthly Trade Supervisor scorecard on Reporting, Execution and Communication, per BU and overall.", tags:["Monthly","Per BU","Ranking"]},
   {id:"mg",   name:"CE Merchandising Guide",   url:"#guides", icon:"book",
-   desc:"Official merchandising guides for TV, Sound Device, Display and Refrigerator — POSM placement and display standards.", tags:["TV / SD / DS","REF","PDF"]},
+   desc:"Official merchandising guides for TV, Sound Device, Display, Refrigerator, Air Conditioner and Washing Machine — POSM placement and display standards.", tags:["TV / SD / DS","REF","AC","WM"]},
   {id:"exa",  name:"Execution Analytics",      url:"https://claude.ai/artifact/AP5aKQrFtC2FAyKhmJ4Z1A", icon:"pie",
    desc:"SPOP, TV BG and SB execution analytics — display compliance across regions and stores.", tags:["SPOP","TV BG","SB"]}
 ];
@@ -433,6 +633,16 @@ const GUIDES = [
    desc:"Active units, nationwide. Valid 04/01/2026 – 12/31/2026."},
   {title:"2026 Refrigerator Guide — Nationwide & SM", cat:"REF", file:"guides/ref-merch-guide-2026-sm.pdf", cover:"guides/ref-merch-guide-2026-sm.jpg", pages:30, badge:"2026",
    desc:"Active units for nationwide and SM models."},
+  {title:"Window-Type AC (WAC) POSM Merch Guide", cat:"AC", file:"guides/ac-window-type-2026.pdf", cover:"guides/ac-window-type-2026.jpg", pages:10, badge:"2026",
+   desc:"Window-Type Compact body POSM, topper, ear wobblers, LED stick-on, 10-year warranty tag, energy labels and rack simulations."},
+  {title:"WindFree 1Way Cassette POSM Merch Guide", cat:"AC", file:"guides/ac-windfree-1way-2025.pdf", cover:"guides/ac-windfree-1way-2025.jpg", pages:9, badge:"2025",
+   desc:"1Way body POSM, Move Up, Slim and K-Wind stick-ons, 5-year warranty tag and rack execution."},
+  {title:"2026 Washing Machine Guide — WD10 & WA40", cat:"WM", file:"guides/wm-2026-wd10-wa40.pdf", cover:"guides/wm-2026-wd10-wa40.jpg", pages:3, badge:"New",
+   desc:"New models: WD10 front load washer-dryer combo and WA40 top load — POP list and placement."},
+  {title:"Washing Machine Guide — WA80F Nationwide", cat:"WM", file:"guides/wm-wa80f-nationwide.pdf", cover:"guides/wm-wa80f-nationwide.jpg", pages:2, badge:"2026",
+   desc:"New nationwide top load fully automatic models WA80F (21\", 24\", 25\") — outer and inner POP."},
+  {title:"Bespoke AI Laundry Merch Guide (WD25DB8995BZTC)", cat:"WM", file:"guides/wm-bespoke-ai-laundry-2024.pdf", cover:"guides/wm-bespoke-ai-laundry-2024.jpg", pages:7, badge:"2024",
+   desc:"Bespoke AI Laundry Combo simulation and POSM: body POSM, AI topper, New Arrival tag, product ID and inner POP."},
   {title:"2025 TV & Sound Device Retail Merch Guide", cat:"TV / SD / DS", file:"guides/tv-sd-merch-guide-2025.pdf", cover:"guides/tv-sd-merch-guide-2025.jpg", pages:48, badge:"2025",
    desc:"Previous-year TV and Sound Device retail merchandising guide, kept for reference."}
 ];
@@ -484,6 +694,39 @@ function closeVideo(){ player.pause(); player.removeAttribute('src'); player.loa
 document.getElementById('mclose').onclick = closeVideo;
 modal.addEventListener('click', e => { if (e.target === modal) closeVideo(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeVideo(); });
+
+/* ---------- hero slides ---------- */
+(() => {
+  const SLIDES = [
+    {cat:"TV & Sound Device", title:"2026 TV Line-up", text:"Micro RGB, OLED, Neo QLED, Mini LED and Crystal UHD — displayed the Samsung way on every baywall.", link:"#guides", cta:"View TV merch guide", filter:"TV / SD / DS"},
+    {cat:"Refrigerators", title:"Bespoke AI Refrigerators", text:"Top Mount, Bottom Mount, Side by Side and French Door models — with the right POP for every unit.", link:"#guides", cta:"View REF merch guide", filter:"REF"},
+    {cat:"Sound Device", title:"Sound Tower", text:"Roll with the party vibe. Sound Tower display and topper guidelines for store execution.", link:"#guides", cta:"View merch guide", filter:"TV / SD / DS"},
+    {cat:"Display Monitors", title:"Odyssey & Smart Monitors", text:"Odyssey G5, Smart Monitor M7, ViewFinity S7 and Essential Monitor S3 table standees.", link:"#guides", cta:"View merch guide", filter:"TV / SD / DS"},
+    {cat:"Air Conditioners", title:"WindFree & Window-Type AC", text:"WindFree 1Way Cassette and Window-Type Compact — body POSM, Move Up, Slim, K-Wind, warranty tags and energy labels.", link:"#guides", cta:"View AC merch guide", filter:"AC"},
+    {cat:"Washing Machines", title:"Bespoke AI Laundry & New WM", text:"Bespoke AI Laundry Combo, WD10 front load washer-dryer, WA40 and WA80F top loads — topper, top POP, body POP and warranty tags.", link:"#guides", cta:"View WM merch guide", filter:"WM"}
+  ];
+  const slides=[...document.querySelectorAll('#slides .slide')], track=document.getElementById('etrack');
+  const info=document.getElementById('einfo'), cat=document.getElementById('ecat'), now=document.getElementById('enow');
+  document.getElementById('etotal').textContent=String(SLIDES.length).padStart(2,'0');
+  const dots=SLIDES.map((_,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Slide '+(i+1));b.onclick=()=>{go(i);restart();};track.appendChild(b);return b;});
+  let cur=0, timer;
+  function go(i){
+    cur=(i+SLIDES.length)%SLIDES.length;
+    slides.forEach((s,k)=>s.classList.toggle('on',k===cur));
+    dots.forEach((d,k)=>d.classList.toggle('on',k<=cur));
+    const d=SLIDES[cur];
+    cat.textContent=d.cat; now.textContent=String(cur+1).padStart(2,'0');
+    info.innerHTML=`<h4>${d.title}</h4><p>${d.text}</p><a href="${d.link}" data-f="${d.filter}">${d.cta} →</a>`;
+    info.classList.remove('swap'); void info.offsetWidth; info.classList.add('swap');
+    info.querySelector('a').onclick=()=>{ if (typeof renderGuides==='function') renderGuides(d.filter); };
+  }
+  function restart(){ clearInterval(timer); timer=setInterval(()=>go(cur+1),6500); }
+  let x0=null; const hero=document.querySelector('.hero-e');
+  hero.addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});
+  hero.addEventListener('touchend',e=>{ if(x0===null)return; const dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>50){go(cur+(dx<0?1:-1));restart();} x0=null; });
+  document.addEventListener('visibilitychange',()=>document.hidden?clearInterval(timer):restart());
+  go(0); restart();
+})();
 document.getElementById('yr').textContent = new Date().getFullYear();
 </script>
 </body>
